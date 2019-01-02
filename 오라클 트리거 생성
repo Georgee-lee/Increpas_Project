@@ -1,0 +1,12 @@
+CREATE OR REPLACE TRIGGER join_after_insert
+BEFORE INSERT OR DELETE ON parti_t
+REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+DECLARE
+     join_idx NUMBER;
+BEGIN
+    join_idx := :NEW.r_idx;
+UPDATE reg_t SET r_equals = r_equals+1 WHERE r_idx = join_idx;
+END;
+
+참여기능을 수행하여 PARTI_T 테이블에 INSERT할 때마다 REG_T의 해당 게시물의 R_EQUALS값이 1씩 증가하게 된다.

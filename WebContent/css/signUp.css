@@ -1,0 +1,56 @@
+#body_contents{width: 970px; height: auto; margin: auto; }
+
+/* 메뉴 밑 문구 */
+.site_desc{font-size: 14px;}
+
+/* 약관동의 페이지 */
+.s_agree{font-size: 20px; font-weight: bold;} 
+
+.agree_chkbox1 {margin-left: 750px; }
+.agree_chkbox2 {margin-left: 700px; }
+
+.agree_btn {text-align: center;  } 
+.a_btn1 {margin-left: 300px;  padding: 5px;}
+.a_btn2 {margin-left: 50px;  padding: 5px;}
+.a_btn1:hover {
+	color: white; background-color: rgb(237, 76, 0);
+}
+
+/* 로그인 페이지 */
+.loginWrap {border: 1px solid black; width: 900px; }
+.login1 {position: relative;  padding: 23px 60px 0 71px;  overflow: hidden; width: 312px;  float: left; background-color: rgb(241, 241, 241); height: 210px; } 
+.login2 {position: relative;  padding: 23px 60px 0 71px;  overflow: hidden; width: 312px;  float: left; background-color: rgb(241, 241, 241); height: 210px;  }
+
+.login_p {color: red; font-weight: bold; font-size: 20px; }
+.find_btn { margin-left: 90px; }
+
+
+/* 테이블 */
+.left_col{background-color: #f1efefe5;}
+
+/* 인풋 위 작은 문구 */
+.mini_comment{font-size: 10px; color: rgb(190, 190, 190)}
+
+table {
+    border-top: 1px solid #b9b9b9;
+    border-collapse: collapse;
+}
+th, td {
+    border-bottom: 1px solid #b9b9b9;
+    padding: 10px;
+}
+label{font-weight: bold;}
+
+.l_btn{text-align: center; margin-bottom: 5%; }
+
+.okay_btn{font-size: 17px; text-align: center;}
+.okay_btn:hover{
+    background-color: #e44e3a; 
+    color: white;
+}
+
+.cancel_btn{font-size: 17px; text-align: center;}
+.cancel_btn:hover{
+    background-color: #e44e3a; 
+    color: white;
+}

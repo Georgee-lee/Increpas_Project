@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd 
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+
+	<context:annotation-config/>
+	<mvc:default-servlet-handler />
+	<mvc:annotation-driven />
+	
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+
+	<!-- Apache의 dbcp라이브러리가 제공하는 BasicDataSource를 생성하려 한다. -->
+	<bean id="ds" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}"/>
+		<property name="url" value="${jdbc.url}"/>
+		<property name="username" value="${jdbc.user}"/>
+		<property name="password" value="${jdbc.pwd}"/>
+		
+		<!-- 동시에 사용할 수 있는 최대커넥션의 수 -->
+		<property name="maxActive" value="${jdbc.maxActive}"/>		
+		
+		<!-- 커넥션풀에 반납할 때 최대로 유지되는 커넥션의 수 -->
+		<property name="maxIdle" value="${jdbc.maxIdle}"/>
+		
+		<!-- 최소한으로 유지할 커넥션의 수 -->
+		<property name="minIdle" value="${jdbc.minIdle}"/>
+	</bean>
+	
+	<bean id="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="ds"/>
+		<property name="mapperLocations" value="classpath:team/mapper/*.xml"/>
+	</bean><!-- FactoryService같은 객체 -->
+	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="factory" />
+	</bean><!-- SqlSession같은 객체 -->
+	
+	<context:component-scan base-package="team.dao"/>
+	
+	<!-- 각 DAO들 정의. 이곳에 ~~~.DAO들을 Bean객체로 만들어 놓고 @어노테이션을 사용할 수 있도록 한다 -->
+	<!-- <bean id="t_dao" class="team.dao.TestDAO"/>
+	<bean id="free_dao" class="team.dao.FreeDAO"/>
+	<bean id="user_dao" class="team.dao.UserDAO"/>
+	<bean id="r_dao" class="team.dao.RegDAO"/>
+	<bean id="h_dao" class="team.dao.HomeDAO"/> 
+	
+	위에 컴포넌트 스캔으로 대체함!!			-->
+
+</beans>

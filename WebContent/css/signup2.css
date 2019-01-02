@@ -1,0 +1,25 @@
+body{
+    background-image: url("../images/portfolio-4.jpg"); background-repeat: no-repeat; background-size: cover;
+}
+
+.txt{
+    text-align: center;
+    background-color: rgba(0,0,0,0.2);
+}
+.txtR{
+    text-align: right; 
+}
+.w600{
+   width: 600px;
+   margin: auto;
+   padding: 30px;	
+}
+.line{
+   display: inline;
+}
+
+.input-group-addon{background-color:  rgba(229, 224, 227, 0.8); }
+
+.blur{background: transparent; border: none; background-color: rgba(255,255,255,0.4); font-weight: bold; font-size: 17px; }
+
+.cbtn{background-color: rgba(97, 96, 96, 0.6); }

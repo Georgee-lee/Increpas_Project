@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+
+	<insert id="signUp" parameterType="team.vo.UserVO"> 
+		INSERT INTO user_t(u_id , u_idx , u_pwd , u_email , u_add , u_name , u_phone , u_bday , u_status )
+		VALUES(#{u_id},u_idx_seq.nextval,#{u_pwd},#{u_email},#{u_add},#{u_name},#{u_phone},#{u_bday},0 )
+	</insert>
+
+	<select id="login" resultType="team.vo.UserVO" parameterType="team.vo.UserVO" > 
+		SELECT u_id, u_idx, u_name FROM user_t 
+		WHERE u_id = #{u_id} AND u_pwd = #{u_pwd} AND u_status = 0 
+	</select>
+		
+	<select id="idcheck" parameterType="String" resultType="int">
+	  SELECT COUNT(*) FROM user_t
+      WHERE  u_id = #{u_id}
+	</select>
+	
+	<select id="searchID" parameterType="java.util.Map" resultType="String">
+		SELECT u_id FROM user_t
+		WHERE u_name = #{u_name} AND u_email = #{u_email}
+	</select>
+	
+	<select id="searchPW" parameterType="java.util.Map" resultType="String">
+		SELECT u_pwd FROM user_t
+		WHERE u_id = #{u_id} AND u_email = #{u_email}
+	</select>
+	
+	<select id="email_check" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM user_t
+		WHERE u_email = #{u_email}
+	</select>
+	
+</mapper>

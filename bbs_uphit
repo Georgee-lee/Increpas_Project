@@ -1,0 +1,39 @@
+//우선 현재 읽기를 하는 게시물에 앞서 읽었던 게시물이라면 조회수를 증가시키면 안된다!!
+		//한 번이라도 읽은 게시물은(BbsVO) HttpSession에 저장된 ArrayList 안에 있다.
+		//즉, 한번이라도 읽었다면 그 게시물은 세션이 있으므로 비교해서 널이면 증가, 널이 아니면 그대로
+		HttpSession session  = request.getSession();
+		Object obj = session.getAttribute("view_list");
+		
+		List<BbsVO> list = null;
+		if(obj == null) {
+			//로그인 후 처음으로 읽은 게시물!!
+			list = new ArrayList<BbsVO>();
+			list.add(vo); //사용자가 선택한 게시물을 List에 저장!
+			
+			BbsDAO.updateHit(b_idx); //DB의 조회수를 증가시킨 거다! 먼저 따온 VO에는 적용이 안되어 있다
+			int hit = Integer.parseInt(vo.getHit());
+			vo.setHit(String.valueOf(hit+1));
+			
+			session.setAttribute("view_list", list);
+		}else {
+			//obj가 null이 아닌 경우는 분명 읽은 게시물이 있는 경우다. 우선 obj를 List<bbsvo>형태로 캐스팅이 필요하다
+			list = (List<BbsVO>)obj;
+			
+			//list에 저장된 모든 vo들을 가져와서 기본키가 파라미터로 받은 b_idx값과 같은지 비교하자!
+			boolean chk = false;
+			
+			for(BbsVO bvo : list) {
+				if(bvo.getB_idx().equals(vo.getB_idx())){
+					chk = true;
+					break;
+				}
+			}
+			//여기 올때는 false or true 둘 다 가능. true가 떨어지면 앞서 같은 게시물을 읽은 적이 있다는 것이다. 그러므로 그냥 패스, false일 때만 작업 필요!
+			if(!chk) {
+				BbsDAO.updateHit(vo.getB_idx());
+				int hit = Integer.parseInt(vo.getHit());
+				vo.setHit(String.valueOf(hit+1));
+				
+				list.add(vo);
+			}
+		}

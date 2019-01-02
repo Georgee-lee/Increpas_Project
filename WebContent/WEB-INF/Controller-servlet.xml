@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd 
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+
+	<context:annotation-config/>
+	<mvc:annotation-driven />
+	
+	<!-- 
+		스프링 환경뿐만 아니라 JSP에서도 폼에 파일을 첨부할 때
+		encType="multipart/form-data"로 지정한다.
+		이렇게 되면 일반적인 request객체로는 파일 뿐만 아니라
+		다른 파라미터 들을 받을 수 없다. 그래서 반드시
+		MultipartRequest객체가 필요한데...
+		스프링에서는 아래와 같은 객체가 지원된다.
+		(multipartResolver)
+		
+		필요한 라이브러리
+			- commons-fileupload
+			- commons-io
+	 -->
+	 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	 	<property name="defaultEncoding" value="utf-8"/>
+	 	<property name="maxUploadSize" value="-1"/>
+	 </bean>
+	 
+	<!-- project.controller 패키지 안에 있는 클래스들을 컨트롤러로 사용하겠다는 의미 -->
+ 	<context:component-scan base-package="project.controller"/>
+ 
+	<!-- View Resolver를 설정하자! -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="suffix" value=".jsp"/><!-- 확장자 -->
+		<property name="prefix" value="/jsp/"/><!-- 뷰페이지 디렉토리로서, WebContent안에 jsp폴더 안에 있는 jsp들을 뜻함 -->
+	</bean>
+	
+	<!-- URL Mapping을 위한 default Servlet을 설정하여 자신이 읽지 못하는 파일들을 js의 servlet으로 전달한다! -->
+	 <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+	 	<property name="alwaysUseFullPath" value="true" />
+	 </bean>
+
+	 <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+	 	<property name="alwaysUseFullPath" value="true" />
+	 </bean>
+	 
+</beans>

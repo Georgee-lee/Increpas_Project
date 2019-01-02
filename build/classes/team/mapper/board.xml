@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="free">
+	
+	<!-- 전체 게시물의 수 가져오기  _parameter -->
+	<select id="all" resultType="int" parameterType="String">
+		SELECT COUNT(*) from board_t
+		where f_status = 0
+		<if test="_parameter != null">
+			<choose>
+				<when test="_parameter == 'free'">
+  					AND boardType = #{boardType}
+  				</when>
+				<when test="_parameter == 'notice'">
+  					AND boardType = #{boardType}
+  				</when>
+  				<when test="_parameter == 'QnA'">
+  					AND boardType = #{boardType}
+  				</when>
+			</choose>
+		</if>
+	</select>
+
+	<!-- 특정 원글의 댓글 수 가져오기 -->
+	<select id="commAll" resultType="int" parameterType="String">
+		SELECT COUNT(*) from comment_t
+		where f_idx = #{f_idx}
+	</select>
+
+	<!-- 글목록 가져오기 위한 ResultMap -->
+	<resultMap type="team.vo.BoardVO" id="free1">
+		<id property="f_idx" column="f_idx"/>
+		<collection property="fc_list" ofType="team.vo.BoardCommVO" select="getComm" column="f_idx"></collection>
+	</resultMap>
+
+	<!-- 자유게시판 특정 글의 댓글 가져오기 -->
+	<select id="getComm" resultType="team.vo.BoardCommVO" parameterType="String">
+		select * from comment_t
+		where f_idx = #{f_idx}
+	</select>
+
+	<!-- 자유게시판에서 원하는 글목록 가져오기// 검색기능도 같이 한다 -->
+	<select id="getlist" resultMap="free1" parameterType="java.util.Map">
+	  select * from
+	  (
+	  	select rownum r_num, a.* from
+	  	(
+	  		select * from board_t
+	  		where f_status = 0
+	  		<if test="boardType != null">
+	  			<choose>
+	  				<when test="boardType.equals('free')">
+	  					AND boardType = #{boardType}
+	  				</when>
+					<when test="boardType.equals('notice')">
+	  					AND boardType = #{boardType}
+	  				</when>
+	  				<when test="boardType.equals('QnA')">
+	  					AND boardType = #{boardType}
+	  				</when>
+	  			</choose>
+	  		</if>
+	  		<if test="searchType != null and searchValue != null">
+	  			<choose>
+	  				<when test="searchType.equals('f_writer')">
+	  					AND f_writer LIKE '%'||#{searchValue}||'%'
+	  				</when>
+  			  		<when test="searchType.equals('f_title')">
+	  					AND f_title LIKE '%'||#{searchValue}||'%'
+	  				</when>
+	  			</choose>
+	  		</if>
+	  		order by f_idx desc
+	  	) a
+	  )
+	  where r_num between #{begin} and #{end}
+	</select>
+	
+	<!-- 자유게시판에 글쓰기 기능 -->
+	<insert id="addlist" parameterType="team.vo.BoardVO">
+		insert into board_t(f_idx, f_title, f_writer, f_content, f_pwd, f_status, f_writedate, f_hit, uploadFileName, boardType, u_idx)
+		values(free_t_seq.NEXTVAL, #{f_title}, #{f_writer}, #{f_content}, #{f_pwd}, 0, sysdate, 0, #{uploadFileName}, #{boardType}, #{u_idx})
+	</insert>
+	
+	<!-- 원하는 게시물 하나 가져오기. View에서 사용 -->
+	<select id="getFbbs" resultMap="free1" parameterType="String">
+		select * from board_t
+		where f_idx = #{f_idx}
+	</select>
+	
+	<!-- 조회수 증가시키는 기능 -->
+	<update id="uphit" parameterType="String">
+		update board_t
+		set f_hit = f_hit+1
+		where f_idx = #{f_idx}
+	</update>
+	
+	<!-- 게시물 수정 기능 -->
+	<update id="edit" parameterType="team.vo.BoardVO">
+		UPDATE board_t
+		SET f_title = #{f_title}, f_content = #{f_content}
+		<if test="uploadFileName != ''">
+			, uploadFileName = #{uploadFileName}
+		</if>
+		WHERE f_idx = #{f_idx}
+	</update>
+	
+	<!-- 특정 게시물에 댓글 달기 기능 -->
+	<insert id="addComm" parameterType="java.util.Map">
+		insert into comment_t(fc_idx, fc_writer, fc_content, fc_writedate, f_idx, u_idx)
+		values(fc_idx_seq.nextval, #{fc_writer}, #{fc_content}, sysdate, #{f_idx}, #{u_idx})
+	</insert>
+	
+	<!-- 게시물의 기본키를 갖고 삭제하는 기능 -->
+	<update id="delFbbs" parameterType="team.vo.BoardVO">
+		UPDATE board_t
+		SET F_STATUS = 1
+		WHERE F_IDX = #{f_idx} AND F_PWD = #{f_pwd}
+	</update>
+	
+	<!-- 메인페이지에 필요한 데이터들 가져오는 기능 -->
+	<select id="mainFree" resultType="team.vo.BoardVO">
+		select * from board_t
+		where ROWNUM &gt;= 1 AND ROWNUM &lt;= 5 and boardtype = 'free' and f_status = 0 
+		order by f_idx desc
+	</select>
+	
+	<select id="mainNotice" resultType="team.vo.BoardVO">
+		select * from board_t
+		where ROWNUM &gt;= 1 AND ROWNUM &lt;= 5 and boardtype = 'notice' and f_status = 0 
+		order by f_idx desc
+	</select>
+	
+	<select id="mainQnA" resultType="team.vo.BoardVO">
+		select * from board_t
+		where ROWNUM &gt;= 1 AND ROWNUM &lt;= 5 and boardtype = 'QnA' and f_status = 0 
+		order by f_idx desc
+	</select>
+	
+	<select id="mainEvent" resultType="team.vo.RegVO">
+		select * from reg_t
+		where ROWNUM &gt;= 1 AND ROWNUM &lt;= 9 and r_status = 0 
+		order by r_idx desc
+	</select>
+</mapper>

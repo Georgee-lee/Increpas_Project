@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reg">
+
+  <!-- 여기서부터 페이징을 위한 -->
+		 
+  <!-- 페이징 기법에 사용될 전체게시물의 수를 반환하는 기능
+  		: RegDAO에 있는 getTotalCount()에서 호출함 -->
+  <select id="totalCount" resultType="int" 
+  parameterType="String">
+  	SELECT COUNT(*) FROM reg_t
+  	WHERE r_status = 0
+  </select>
+    
+  <!-- 특정 원글의 댓글 수 가져오기 -->
+	<select id="commAll" resultType="int" parameterType="String">
+		SELECT COUNT(*) from rcomm_t
+		where r_idx = #{r_idx}
+	</select>
+  
+
+  <!-- /여기까지 페이징을 위한 -->
+
+  <!-- 글목록 가져오기 위한 ResultMap -->
+	<resultMap type="team.vo.RegVO" id="map1">
+		<id property="r_idx" column="r_idx"/>
+		<collection property="rc_list" ofType="team.vo.RCommVO" select="getRComm" column="r_idx"></collection>
+	</resultMap>
+	
+   <!-- 자유게시판 특정 글의 댓글 가져오기 -->
+	<select id="getRComm" resultType="team.vo.RCommVO" parameterType="String">
+		select * from rcomm_t
+		where r_idx = #{r_idx}
+	</select>
+	
+  
+ 	<select id="getlist" resultMap="map1" parameterType="java.util.Map">
+	   select * from
+	  (
+	  	select rownum r_num, a.* from
+	  	(
+	  		select * from reg_t
+	  		where r_status = 0
+	  	<if test="searchType != null and searchValue != null">
+	  			<choose>
+	  				<when test="searchType.equals('r_writer')">
+	  					AND r_writer LIKE '%'||#{searchValue}||'%'
+	  				</when>
+  			  		<when test="searchType.equals('r_title')">
+	  					AND r_title LIKE '%'||#{searchValue}||'%'
+	  				</when>
+	  			</choose>
+	  		</if>
+	  		order by r_idx desc
+	  	) a
+	  )
+	  where r_num between #{begin} and #{end}
+	</select>
+	
+	<!-- 게시물 -->
+	<select id="getIdx" resultType="int"> 
+	select r_idx_seq.NEXTVAL from dual 
+	</select>
+ 
+	<!-- 게시물 저장 -->
+	<insert id="add" parameterType="team.vo.RegVO">
+		INSERT INTO reg_t(r_idx, r_title, r_category1, r_category2, r_writeDate, r_sDate,
+					r_eDate, r_join, r_equals, r_content, r_writer, r_pwd, r_sTitle,
+					r_add, r_status, uploadFileName, r_ip, imagepath, u_idx)
+		VALUES(#{r_idx}, #{r_title}, #{r_category1}, #{r_category2}, sysdate, #{r_sDate}, #{r_eDate}, 
+					#{r_join}, 0, #{r_content},  #{r_writer}, #{r_pwd}, #{r_sTitle}, #{r_add}, 0,
+					#{uploadFileName}, #{r_ip}, #{imagepath}, #{u_idx})
+	</insert>
+	
+  <!-- 특정 게시물에 댓글 달기 기능 -->
+	<insert id="addRComm" parameterType="java.util.Map">
+		insert into rcomm_t(rc_idx, rc_writer, rc_content, rc_writedate, rc_star, r_idx, u_idx)
+		values(rc_idx_seq.nextval, #{rc_writer}, #{rc_content}, sysdate, #{rc_star},#{r_idx}, #{u_idx})
+	</insert>
+	
+
+   <!-- 특정 원글의 별점 평균 수 가져오기 -->
+	<select id="avgStar" resultType="String" parameterType="String">
+		SELECT avg(rc_star) 
+		from rcomm_t
+		where r_idx = #{r_idx}
+	</select>
+	
+		
+  <!-- 특정 게시물에 댓글 삭제 기능 -->
+  <delete id="del" parameterType="String">
+  delete from rcomm_t
+  where rc_idx = #{rc_idx}
+  </delete>
+	
+  <!-- showDetails. 특정게시물을 클릭했을때 Detail을 가지고 오는 곳! -->
+  <select id="getReg" resultMap="map1" parameterType="String">
+   SELECT * FROM reg_t
+   WHERE r_idx = #{r_idx}
+  </select>
+
+  
+  <!-- 게시물 수정 -->
+  <update id="edit" parameterType="team.vo.RegVO">
+		UPDATE REG_T
+		SET r_title = #{r_title},
+			r_sDate = #{r_sDate},
+			r_eDate = #{r_eDate},
+			r_sTitle = #{r_sTitle},
+			r_add = #{r_add},
+			r_content = #{r_content} 
+			<if test="uploadFileName != ''">
+				,uploadFileName = #{uploadFileName}
+			</if>
+		WHERE r_idx = #{r_idx} AND r_pwd = #{r_pwd} 
+   </update>   
+    
+  <!-- 게시물 삭제 기능 = 삭제하지않고 status1로 보관한다. -->
+    <update id="delReg" parameterType="String">
+		UPDATE reg_t
+		SET r_status = 1
+		WHERE r_idx = #{r_idx}
+   </update>
+  
+  <!-- 선택한 재능 나눔 게시물에 참여하기 기능! -->
+	<insert id="joinEvent" parameterType="team.vo.JoinVO">
+		insert into parti_t
+		values(p_idx_seq.nextval, #{r_idx}, #{r_edate}, #{r_writer}, #{u_email}, #{u_name}, #{u_id}, #{u_idx})
+	</insert>
+	
+	<!-- 나눔 참여하기 전 이미 있는 지 확인하는 기능! -->
+	<select id="joinCheck" parameterType="team.vo.JoinVO" resultType="int">
+		  SELECT COUNT(*) FROM parti_t
+	      WHERE  u_idx = #{u_idx} and r_idx = #{r_idx}
+	</select>
+	
+	<!-- 로그인한 사용자의 이름으로 게시물을 검색한다 -->
+	<select id="getMylist" resultType="team.vo.RegVO" parameterType="String">
+		select * from reg_t
+		where r_writer = #{u_name}
+	</select>
+	
+</mapper>

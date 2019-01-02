@@ -1,0 +1,77 @@
+#mary{
+/*	border: 2px solid red;*/
+	height: 100px;
+}
+
+/*
+div#body_contents{
+	display: inline;
+}
+*/
+
+#id-label{
+	font-size: 20px; 
+	color: rgb(120, 120, 120);
+/*	text-align: center;*/
+}
+
+div#box4{
+	padding-top: 100px;
+	width: 600px;
+	height: 100px;	
+	border: 5px solid red;
+	margin-left: 20px;	
+	display: inline;
+}
+
+div#col{
+	margin-top : 60px;
+	width: 700px;
+	height: 100px;	
+	margin-left: 50px;
+	text-align: center;
+}
+.bt-wh{
+	width: 170px;
+	height: 80px;
+	font-size: large;	
+}
+div#drop_o{
+	margin-top : 60px;
+	width: 700px;
+	height: 100px;	
+/* 	border: 5px solid red;*/
+	display: block;
+	margin-left: 100px;
+}
+div#tablebox{
+	width: 700px;
+	height: 300px;	
+/* 	border: 5px solid red;*/
+	margin-top: -200px;	
+	margin-left: 335px;
+}
+ul#page-no{
+	padding: 30px;
+	margin-left: 500px;
+	margin-top: 30px;
+}
+div#dropout{
+	padding: 10px;
+	margin-left: 600px;
+}
+div#searchbar{
+	padding-top: 20px;
+	margin-top: 50px;
+	margin-left: 500px;
+}
+.l_btn{
+	margin-top: 30px;
+	text-align: center;
+}
+
+#body_contents{
+	margin-top: 70px;
+	margin-bottom: 100px;
+/*	border: 2px solid red;*/
+}

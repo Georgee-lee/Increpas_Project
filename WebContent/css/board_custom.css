@@ -1,0 +1,128 @@
+.m_board_sec{
+    width: 1120px;
+    padding: 0;
+    margin-top: 50px;
+    overflow: hidden;
+}
+
+.m_board_sec li:nth-child(1){
+    float: left;
+    width: 300px;
+    height: auto;
+    text-align: left;
+    margin-right: 75px;
+}
+
+.m_board_sec li:nth-child(2){
+    float: left;
+    width: 300px;
+    height: auto;
+    text-align: left;
+    margin-right: 90px;
+}
+
+.m_board_sec li:nth-child(3){
+    float: left;
+    width: 310px;
+    height: auto;
+    text-align: left;
+    margin-right: 30px;
+}
+
+.m_board_list{
+    margin: 0;
+    padding: 0;
+}
+.m_board_list a{
+    color: black!important;
+}
+
+.cw a{color: white; }
+.bk{top: 50px !important; right: -35px !important; }
+.bk a{color: black;}
+.bb{border-bottom: 1px solid orange; }
+.h70{height: 70px;}
+
+ul, li {list-style: none; }
+
+.w700{display: inline-block; width: 700px; }
+
+#category{
+    position: relative;
+    height: auto;
+    background-image: url("../images/together.png");
+    margin: 25px 0;
+   }
+
+#register{
+    background-image: url("../images/together.png");
+}
+
+  .ico_wrap{ 
+    height: 94px;
+    padding-left: 250px;
+  }
+  .ico_wrap li{
+    float: left;
+    width: 18%;
+    height: 94px;
+    font-size: 18px;
+    font-weight: bold;
+   }
+   .ico_wrap li>a{
+     color: white;
+   }
+   .card-body>a>img{border-radius: 50%;}
+
+   .nav-item>a:hover{color: violet; }
+
+   /* sidebar css */
+   /* The side navigation menu */
+    .sidenav {
+        height: 100%; /* 100% Full-height */
+        width: 0; /* 0 width - change this with JavaScript */
+        position: fixed; /* Stay in place */
+        z-index: 5; /* Stay on top */
+        top: 0; /* Stay at the top */
+        left: 0;
+        background-color: rgb(97, 96, 96); /* Black*/
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 60px; /* Place content 60px from the top */
+        transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    }
+
+    /* The navigation menu links */
+    .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #e9e7e7;
+        display: block;
+        transition: 0.3s;
+    }
+
+    /* When you mouse over the navigation links, change their color */
+    .sidenav a:hover {
+        color: #f1f1f1;
+    }
+
+    /* Position and style the close button (top right corner) */
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+    /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+    #main {
+        transition: margin-left .5s;
+    }
+
+    /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+    @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+    }
+   /*sidebar css*/

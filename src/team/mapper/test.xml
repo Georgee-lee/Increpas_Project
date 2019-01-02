@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test">
+
+  <!-- 테스트 mapper입니다. 테스트하고 싶은 SQL문을 작성하여 실험해 보는 곳 -->
+	
+  <select id="getAll" resultType="team.vo.TestVO">
+    select * from employees
+  </select>
+  
+</mapper>
