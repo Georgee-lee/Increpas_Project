@@ -81,7 +81,7 @@
 	<!-- 자유게시판에 글쓰기 기능 -->
 	<insert id="addlist" parameterType="team.vo.BoardVO">
 		insert into board_t(f_idx, f_title, f_writer, f_content, f_pwd, f_status, f_writedate, f_hit, uploadFileName, boardType, u_idx)
-		values(free_t_seq.NEXTVAL, #{f_title}, #{f_writer}, #{f_content}, #{f_pwd}, 0, sysdate, 0, #{uploadFileName}, #{boardType}, #{u_idx})
+		values(board_t_seq.NEXTVAL, #{f_title}, #{f_writer}, #{f_content}, #{f_pwd}, 0, sysdate, 0, #{uploadFileName}, #{boardType}, #{u_idx})
 	</insert>
 	
 	<!-- 원하는 게시물 하나 가져오기. View에서 사용 -->
@@ -110,7 +110,7 @@
 	<!-- 특정 게시물에 댓글 달기 기능 -->
 	<insert id="addComm" parameterType="java.util.Map">
 		insert into comment_t(fc_idx, fc_writer, fc_content, fc_writedate, f_idx, u_idx)
-		values(fc_idx_seq.nextval, #{fc_writer}, #{fc_content}, sysdate, #{f_idx}, #{u_idx})
+		values(comment_t_seq.nextval, #{fc_writer}, #{fc_content}, sysdate, #{f_idx}, #{u_idx})
 	</insert>
 	
 	<!-- 게시물의 기본키를 갖고 삭제하는 기능 -->

@@ -84,8 +84,10 @@ public class BoardDAO {
 	 }
 	 
 	 /* 기본키를 갖고 글 삭제하는 기능 */
-	 public void delFbbs(BoardVO vo) {
-		 ss.update("free.delFbbs", vo);
+	 public int delFbbs(BoardVO vo) {
+		 int i = ss.update("free.delFbbs", vo);
+		 
+		 return i;
 	 }
 	
 	 /* 조회수 증가시키기 */

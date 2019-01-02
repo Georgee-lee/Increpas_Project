@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -235,12 +236,20 @@ public class BoardControll {
 		return mv;
 	}
 	
-	/* 특정 게시물 지우기 기능, GET방식은 위험하니까 POST로 바꾸자!! url에 parameter를 직접 써서 넘겨주면 삭제된다... */
+	/* 특정 게시물 지우기 기능 */
 	@RequestMapping("delboard")
-	public String delFbbs(BoardVO vo, String boardType) {
-		f_dao.delFbbs(vo);
+	@ResponseBody
+	public Map<String, Integer> delFbbs(BoardVO vo, String boardType) {
+		int chk = f_dao.delFbbs(vo);
 		
-		return "redirect:flist?boardType="+boardType;
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		
+		if(chk > 0) 
+			map.put("isDel", 1);
+		else
+			map.put("isDel", 0);
+		
+		return map;
 	}
 	
 	@RequestMapping("edit")

@@ -163,15 +163,24 @@
 			if(ori_writer == user_name){
 				var pwd = prompt("비밀번호를 입력해 주세요");
 				
-				if(pwd == ${fvo.f_pwd}){
-					document.getElementById("f_pwd").value = pwd;
-					location.href = 'del?f_idx='+${fvo.f_idx}+'&f_pwd='+pwd+'&boardType='+'${fvo.boardType}';
-					//document.forms[1].submit;
-				}else if(pwd == null) {
-					return;
-				}else {
-					alertify.alert("비밀번호가 틀렸습니다");
-				}
+				$.ajax({
+					url : 'delboard',
+					data : 'f_idx='+${fvo.f_idx}+'&f_pwd='+encodeURIComponent(pwd)+'&boardType='+'${fvo.boardType}',
+					type : 'POST',
+					dataType : 'JSON'
+				}).done(function(data){
+					if(data.isDel == 1){
+						alert("게시물을 삭제하였습니다");
+						location.href = 'flist?boardType='+'${fvo.boardType}'+'&nowPage='+'${param.nowPage}';
+					}
+					else{
+						alert("비밀번호가 틀렸습니다");
+						return;
+					}
+					
+				}).fail(function(err){
+					console.log(err);
+				})
 				
 			}else
 				alertify.error("작성자만 삭제가 가능합니다");
