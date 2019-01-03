@@ -94,8 +94,8 @@ public class RegDAO {
 		}
 	
 	/* 게시물 삭제하기 */
-	public boolean delReg(String r_idx) {
-			int cnt  = ss.delete("reg.delReg", r_idx);
+	public boolean delReg(RegVO vo) {
+			int cnt  = ss.delete("reg.delReg", vo);
 			if(cnt > 0)
 				return true;
 			else

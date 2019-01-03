@@ -143,7 +143,7 @@
             <button class="btn btn-primary" type="button" 
             onclick="edito()">글 수정</button>
 			<button class="btn btn-danger" type="button" 
-			onclick="delReg()" >글  삭제</button>
+			onclick="delReg()" >글 삭제</button>
 			<button class="btn btn-dark" type="button" 
 			onclick="javascript:location.href='backlist?r_idx=${rvo.r_idx}&nowPage=${rvo.nowPage }'">나눔보기</button> 
 				</td>
@@ -161,14 +161,6 @@
   	
   </div>
 </div>
-
-		<!-- 게시물 삭제시 전송할 Form -->
-			<form action="delReg" method="post">
-				<input type="hidden" name="nowPage" value="${rvo.nowPage }">
-				<input type="hidden" name="r_idx" value="${rvo.r_idx }">
-				<input type="hidden" id="r_pwd" name="r_pwd" value="">
-			</form>
-
           <hr>
           
           <!-- Comments Form -->
@@ -479,14 +471,22 @@
         		if(ori_writer == user_name){
         			var pwd = prompt("비밀번호를 입력해 주세요");
         			
-        			if(pwd == ${rvo.r_pwd}){
-        				document.getElementById("r_pwd").value = pwd;
-        				location.href = 'delReg?r_idx='+${rvo.r_idx}+'&r_pwd='+pwd;
-        			}else if(pwd == null) {
-    					return;
-    				}else {
-        				alert("비밀번호가 틀렸습니다");
-        			}
+        			$.ajax({
+        				url : 'delReg',
+        				data : 'r_idx='+${rvo.r_idx}+'&r_pwd='+encodeURIComponent(pwd),
+        				type : 'POST',
+        				dataType : 'JSON'
+        			}).done(function(data){
+						if(data.isDel == 1){
+							alert("게시물 삭제 완료");
+							location.href = 'backlist?r_idx='+${rvo.r_idx}+'&nowPage='+${rvo.nowPage};
+						}else{
+							alert("비밀번호가 틀렸습니다");
+							return;
+						}
+        			}).fail(function(err){
+        				console.log(err);
+        			})
         			
         		}else
         			alert("작성자만 삭제가 가능합니다");

@@ -90,13 +90,6 @@
 		</div>
 	</form>
 	
-	<!-- 게시물 삭제시 전송할 Form -->
-	<form action="delboard" method="post">
-		<input type="hidden" name="nowPage" value="${param.nowPage }">
-		<input type="hidden" name="f_idx" value="${fvo.f_idx }">
-		<input type="hidden" id="f_pwd" name="f_pwd" value="">
-		<input type="hidden" name="boardType" value="${fvo.boardType}">
-	</form>
 	
 	 <!-- Single Comment -->
      <c:forEach items="${fvo.fc_list}" var="commvo">

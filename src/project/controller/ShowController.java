@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -242,10 +243,18 @@ public class ShowController {
 	}
 
 	// 게시물 삭제
-		@RequestMapping("delReg")
-	public String delFbbs(String r_idx, String nowPage) {
-		r_dao.delReg(r_idx);
-		return "redirect:rlist?r_idx="+r_idx+"&nowPage"+nowPage;
+	@RequestMapping("delReg")
+	@ResponseBody
+	public Map<String, Integer> delFbbs(RegVO vo) {
+		boolean chk = r_dao.delReg(vo);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		
+		if(chk) 
+			map.put("isDel", 1);
+		else
+			map.put("isDel", 0);
+		
+		return map;
 	}
 	
 	

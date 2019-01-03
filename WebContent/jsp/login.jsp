@@ -13,7 +13,17 @@
     <link href="css/jquery-ui.min.css" rel="stylesheet">
     <link href="css/bootstrap-social.css" rel="stylesheet"> 
 	<link href="css/login.css" rel="stylesheet" >
-		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+  	<meta name="google-signin-client_id" content="995871649659-18p4c7ugrnpp51eediarpqbbugaqj2am.apps.googleusercontent.com">
+  <script>
+    function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log('Name: ' + profile.getName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+}
+  </script>
 </head>
 	
 <body>    
@@ -50,7 +60,8 @@
                             <a class="btn btn-block btn-social btn-facebook" href="naverlogin">
                                 <i class="fa fa-facebook"></i> Sign in with Naver
                          	</a>
-                            <a class="btn btn-block btn-social btn-google-plus">
+                            <a class="btn btn-block btn-social btn-google-plus g-signin2" data-onsuccess="onSignIn">
+                            		<!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
                                 <i class="fa fa-google-plus"></i> Sign in with Google
                             </a>
                             <a class="btn btn-block btn-social btn-instagram">
@@ -72,6 +83,7 @@
 
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
 
 <script>
 

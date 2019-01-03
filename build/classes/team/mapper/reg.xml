@@ -118,10 +118,10 @@
    </update>   
     
   <!-- 게시물 삭제 기능 = 삭제하지않고 status1로 보관한다. -->
-    <update id="delReg" parameterType="String">
+    <update id="delReg" parameterType="team.vo.RegVO">
 		UPDATE reg_t
 		SET r_status = 1
-		WHERE r_idx = #{r_idx}
+		WHERE r_idx = #{r_idx} and r_pwd = #{r_pwd}
    </update>
   
   <!-- 선택한 재능 나눔 게시물에 참여하기 기능! -->
