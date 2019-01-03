@@ -235,11 +235,11 @@ public class ShowController {
 	
 	
 	@RequestMapping("rcomm")
-	public ModelAndView addRComm(String rc_writer, String comment, String rc_star ,String r_idx, String nowPage, String u_idx) {
-		r_dao.addRComm(rc_writer, comment, rc_star, r_idx, u_idx);
-		RCommVO rcvo = new RCommVO();
-		ModelAndView mv = showDetail(r_idx, nowPage);
-		return mv;
+	public String addRComm(RCommVO cvo) {
+		r_dao.addRComm(cvo);
+		//return showDetail(cvo.getR_idx(), String.valueOf(cvo.getNowPage()));
+		System.out.println(cvo.getNowPage());
+		return "redirect:rdetail?r_idx="+cvo.getR_idx()+"&nowPage="+cvo.getNowPage();
 	}
 
 	// 게시물 삭제

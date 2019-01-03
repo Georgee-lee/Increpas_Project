@@ -113,13 +113,13 @@ public class RegDAO {
 		return ar;
 	 }
 
-	 public void addRComm(String rc_writer, String rc_content,String rc_star ,String r_idx, String u_idx) {
+	 public void addRComm(RCommVO rcvo) {
 		 Map<String, String> map = new HashMap<>();
-		 map.put("rc_writer", rc_writer);
-		 map.put("rc_content", rc_content);
-		 map.put("r_idx", r_idx);
-		 map.put("rc_star", rc_star);
-		 map.put("u_idx", u_idx);
+		 map.put("rc_writer", rcvo.getRc_writer());
+		 map.put("rc_content", rcvo.getRc_content());
+		 map.put("r_idx", rcvo.getR_idx());
+		 map.put("rc_star", rcvo.getRc_star());
+		 map.put("u_idx", rcvo.getU_idx());
 		 
 		 ss.insert("reg.addRComm", map);
 	 }

@@ -145,7 +145,7 @@
 			<button class="btn btn-danger" type="button" 
 			onclick="delReg()" >글 삭제</button>
 			<button class="btn btn-dark" type="button" 
-			onclick="javascript:location.href='backlist?r_idx=${rvo.r_idx}&nowPage=${rvo.nowPage }'">나눔보기</button> 
+			onclick="javascript:location.href='backlist?r_idx=${rvo.r_idx}&nowPage=${param.nowPage }'">나눔보기</button> 
 				</td>
 			 </tr>
 			 </tbody>
@@ -170,7 +170,7 @@
               <form action="rcomm" method="post" name="cmtform">
                 <div class="comment">
                 <input type="hidden" name="rc_writer" value="${sessionScope.lvo.u_name }">
-				<input type="hidden" name="nowPage" value="${rvo.nowPage }">
+				<input type="hidden" name="nowPage" value="${param.nowPage }">
 				<input type="hidden" name="r_idx" value="${rvo.r_idx }">
 				<input type="hidden" name="u_idx" value="${lvo.u_idx }">
                 <span class="margin">
@@ -185,7 +185,7 @@
                   </div>
                   <input type='hidden' name="rc_star"/>
                 <br/>
-                  <textarea name="comment" class="form-control" rows="3"></textarea>
+                  <textarea name="rc_content" class="form-control" rows="3"></textarea>
                     <button class="btn btn-primary" type="button" onclick="sendData(this.form)">등록하기</button>
                </form>
             </div>
@@ -198,7 +198,7 @@
             <div class="media-body">
               <a class="text-hayley1">${rc.rc_writer} </a><span>&nbsp;&nbsp;${fn:substring(rc.rc_writeDate,0,19)}</span>
           	   <span><button class="del btn btn-danger" type="button" 
-          	   onclick="javascript:location.href='del?r_idx=${rvo.r_idx}&rc_idx=${rc.rc_idx}&nowPage=${rvo.nowPage}'">
+          	   onclick="javascript:location.href='del?r_idx=${rvo.r_idx}&rc_idx=${rc.rc_idx}&nowPage=${param.nowPage}'">
           	   <i class="fa fa-minus-circle"></i></button></span>
           	   <div>
           	   <input class="text-warning" type='hidden' value="${rc.rc_star}"/>
@@ -260,7 +260,7 @@
     	<input type="hidden" name="u_email" value="${lvo.u_email }">
     	<input type="hidden" name="u_name" value="${lvo.u_name }">
     	<input type="hidden" name="u_id" value="${lvo.u_id }">
-    	<input type="hidden" name="nowPage" value="${rvo.nowPage }">
+    	<input type="hidden" name="nowPage" value="${param.nowPage }">
     	<input type="hidden" name="u_idx" value="${lvo.u_idx }">
     </form>
   
@@ -327,7 +327,7 @@
      }
   
  	function sendData(frm){
- 		var comm = frm.comment.value;
+ 		var comm = frm.rc_content.value;
  	
  		if(comm.trim().length > 0)
  			frm.submit();
@@ -479,7 +479,7 @@
         			}).done(function(data){
 						if(data.isDel == 1){
 							alert("게시물 삭제 완료");
-							location.href = 'backlist?r_idx='+${rvo.r_idx}+'&nowPage='+${rvo.nowPage};
+							location.href = 'backlist?r_idx='+${rvo.r_idx}+'&nowPage='+${param.nowPage};
 						}else{
 							alert("비밀번호가 틀렸습니다");
 							return;
@@ -497,7 +497,7 @@
         		var user_name = "${sessionScope.lvo.u_name}";
         		
         		if(ori_writer == user_name)
-        			javascript:location.href='regEdit?r_idx='+${rvo.r_idx}+'&nowPage='+${rvo.nowPage };
+        			javascript:location.href='regEdit?r_idx='+${rvo.r_idx}+'&nowPage='+${param.nowPage };
        			else
        				alert("작성자만 수정이 가능합니다");	
         	}
