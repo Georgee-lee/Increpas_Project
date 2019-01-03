@@ -138,52 +138,6 @@
     		  location.href = 'reg';
     	  else
     		  alertify.alert("로그인이 필요합니다");
-      }
-      
-     /*  $(function(){
-    	  if(${lvo != null}) //로그인을 한 상태에서만 비동기 통신을 계속한다.
-			var t = setInterval('goAjax()', 3000); //3초에 한 번씩 데이터 체크!!
-      });
-      
-      function goAjax() {
-    	  console.log("비동기 시작");
-    	  
-    	  var u_name = $("#u_name").val();
-    	  var params = "u_name="+u_name+"&num=1"
-    	  
-	      	$.ajax({
-	    		 url:'chkMsg',
-	    		 type:'POST',
-	    		 data: params,
-	    		 dataType: 'json',
-	      	}).done(function(data){
-      			 console.log("두 번째 찍으러 갑니다");
-      			 var x = setTimeout('goAjax2()', 100);
-	      	}).fail(function(err){
-	      		console.log(err);
-	      	});
-       }
-      
-      function goAjax2() {
-    	  var u_name = $("#u_name").val();
-    	  var params2 = "u_name="+u_name+"&num=2"
-    	  
-	      $.ajax({
-	 		 url:'chkMsg',
-	 		 type:'POST',
-	 		 data: params2,
-	 		 dataType: 'json'
-			}).done(function(data){
-				if(data.checkValue == 1){
-					console.log("변동사항 없음");
-					console.log("다시 첫 번째로 갑니다");
-				}
-				else if(data.checkValue == 2){
-					alertify.error(data.output);
-				}
-			}).fail(function(err){
-				console.log(err);
-			})
-	    }  */
+      }      
   </script>
 </body>

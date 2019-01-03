@@ -15,15 +15,6 @@
 	<link href="css/login.css" rel="stylesheet" >
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
   	<meta name="google-signin-client_id" content="995871649659-18p4c7ugrnpp51eediarpqbbugaqj2am.apps.googleusercontent.com">
-  <script>
-    function onSignIn(googleUser) {
-      var profile = googleUser.getBasicProfile();
-      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-      console.log('Name: ' + profile.getName());
-      console.log('Image URL: ' + profile.getImageUrl());
-      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-}
-  </script>
 </head>
 	
 <body>    
@@ -101,6 +92,14 @@
 			localStorage.setItem('user', foo);
 		}			
 	}
+	
+    function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log('Name: ' + profile.getName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+}
 
 	function confirm(frm) {
 		var id = $("#id").val();
