@@ -195,9 +195,10 @@ public class ShowController {
 	
 	
 	RegVO[] ar = r_dao.getList(map);
-	int searchNum = ar.length;
+	
 	/* 만약 검색했다면 검색된 레코드 수 만큼 페이징을 다시 한다! */
 	if(searchValue != null) {
+		int searchNum = ar.length;
 		//페이징 처리를 하는 객체 생성
 		RlistPaging page1 = new RlistPaging(nowPage, searchNum, BLOCK_LIST, BLOCK_PAGE);	
 		ModelAndView mv = new ModelAndView();

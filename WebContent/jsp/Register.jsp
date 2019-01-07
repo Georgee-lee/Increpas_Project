@@ -119,7 +119,7 @@
 				</tr>
 				<tr>
 					<td><lable class="input-group-text" id="inputGroup-sizing-sm"> 첨부파일 </lable></td>
-					<td colspan="4"><input type="file" class="form-control" id="exampleFormControlFile1" name="upload"></td>
+					<td colspan="4"><input type="file" class="form-control" id="exampleFormControlFile2" name="upload"></td>
 				</tr>
 				<tr>
 					<td><input type="button" class="btn btn-outline-secondary" value="지도보기" onclick="javascript:openWin();"/></td>

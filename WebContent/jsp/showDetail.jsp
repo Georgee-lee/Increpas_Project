@@ -140,10 +140,8 @@
 				  </a>
 				  </td>
 			 	<td>
-            <button class="btn btn-primary" type="button" 
-            onclick="edito()">글 수정</button>
-			<button class="btn btn-danger" type="button" 
-			onclick="delReg()" >글 삭제</button>
+            <button class="btn btn-primary" type="button" onclick="edito()">글 수정</button>
+			<button class="btn btn-danger" type="button" onclick="delReg()">글 삭제</button>
 			<button class="btn btn-dark" type="button" 
 			onclick="javascript:location.href='backlist?r_idx=${rvo.r_idx}&nowPage=${param.nowPage }'">나눔보기</button> 
 				</td>
@@ -334,8 +332,46 @@
  		else{
  			alert("내용을 입력하세요");
  			return;
- 		}
-  	}
+ 		}	
+ 	}
+ 	
+ 	function delReg() {
+		var ori_writer = "${rvo.r_writer}";
+		var user_name = "${sessionScope.lvo.u_name}";
+		
+		if(ori_writer == user_name){
+			var pwd = prompt("비밀번호를 입력해 주세요");
+			
+			$.ajax({
+				url : 'delReg',
+				data : 'r_idx='+${rvo.r_idx}+'&r_pwd='+encodeURIComponent(pwd),
+				type : 'POST',
+				dataType : 'JSON'
+			}).done(function(data){
+				if(data.isDel == 1){
+					alert("게시물 삭제 완료");
+					location.href = 'backlist?r_idx='+${rvo.r_idx}+'&nowPage='+${param.nowPage}
+				}else{
+					alert("비밀번호가 틀렸습니다");
+					return;
+				}
+			}).fail(function(err){
+				console.log(err);
+			})
+			
+		}else
+			alert("작성자만 삭제가 가능합니다");
+	}
+	
+	function edito(){
+		var ori_writer = "${rvo.r_writer}";
+		var user_name = "${sessionScope.lvo.u_name}";
+		
+		if(ori_writer == user_name)
+			javascript:location.href='regEdit?r_idx='+${rvo.r_idx}+'&nowPage='+${param.nowPage };
+		else
+			alert("작성자만 수정이 가능합니다");	
+	}
   	
 	function sendStar(frm){
 		
@@ -463,44 +499,6 @@
                });
       
          });
-          
-        	function delReg() {
-        		var ori_writer = "${rvo.r_writer}";
-        		var user_name = "${sessionScope.lvo.u_name}";
-        		
-        		if(ori_writer == user_name){
-        			var pwd = prompt("비밀번호를 입력해 주세요");
-        			
-        			$.ajax({
-        				url : 'delReg',
-        				data : 'r_idx='+${rvo.r_idx}+'&r_pwd='+encodeURIComponent(pwd),
-        				type : 'POST',
-        				dataType : 'JSON'
-        			}).done(function(data){
-						if(data.isDel == 1){
-							alert("게시물 삭제 완료");
-							location.href = 'backlist?r_idx='+${rvo.r_idx}+'&nowPage='+${param.nowPage};
-						}else{
-							alert("비밀번호가 틀렸습니다");
-							return;
-						}
-        			}).fail(function(err){
-        				console.log(err);
-        			})
-        			
-        		}else
-        			alert("작성자만 삭제가 가능합니다");
-        	}
-        	
-        	function edito(){
-        		var ori_writer = "${rvo.r_writer}";
-        		var user_name = "${sessionScope.lvo.u_name}";
-        		
-        		if(ori_writer == user_name)
-        			javascript:location.href='regEdit?r_idx='+${rvo.r_idx}+'&nowPage='+${param.nowPage };
-       			else
-       				alert("작성자만 수정이 가능합니다");	
-        	}
          </script>
 </body>
 </html>
