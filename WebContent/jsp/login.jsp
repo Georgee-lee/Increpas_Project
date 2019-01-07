@@ -13,16 +13,6 @@
     <link href="css/jquery-ui.min.css" rel="stylesheet">
     <link href="css/bootstrap-social.css" rel="stylesheet"> 
 	<link href="css/login.css" rel="stylesheet" >
-  	<meta name="google-signin-client_id" content="995871649659-18p4c7ugrnpp51eediarpqbbugaqj2am.apps.googleusercontent.com">
-  	<script type="text/javascript">
-	  	function onSignIn(googleUser) {
-	        var profile = googleUser.getBasicProfile();
-	        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-	        console.log('Name: ' + profile.getName());
-	        console.log('Image URL: ' + profile.getImageUrl());
-	        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-	  	}
-  	</script>
 </head>
 <body>    
 
@@ -59,12 +49,8 @@
                                 <i class="fa fa-facebook"></i> Sign in with Naver
                          	</a>
                             <a class="btn btn-block btn-social btn-google-plus">
-                            		<!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
-                                <i class="fa fa-google-plus"></i><span class="g-signin2" data-onsuccess="onSignIn"> Sign in with Google</span>
-                            </a>
-                            <a class="btn btn-block btn-social btn-instagram">
-                                <i class="fa fa-instagram"></i> Sign in with Instagram
-                            </a>                         
+                                <i class="fa fa-google-plus"></i>Sign in with Google
+                            </a>                      
 					</div>
 													
 					<div>
