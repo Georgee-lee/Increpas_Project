@@ -50,23 +50,6 @@
 							id="email" name="u_email" placeholder="User e-mail"/>						
 						</div>				
 					
-					 	<div class="form-group input-group">
-							<label class="input-group-addon" for="addr">주소 :</label>
-							<input class="form-control blur" type="text"
-							id="addr" name="u_add"/>	
-							<button type="button" class="btn btn-info btn-block cbtn" id="addr_btn">우편번호 찾기</button>																							
-						</div>					
-						<div class="form-group input-group">
-							<label class="input-group-addon " for="b_addr">기본 주소:</label>
-							<input class="form-control blur" type="text" 
-							id="b_addr" name="b_addr"/>														
-						</div>				
-							<div class="form-group input-group">
-							<label class="input-group-addon " for="d_addr">상세 주소:</label>
-							<input class="form-control blur" type="text" 
-							id="d_addr" name="d_addr"/>														
-						</div>						
-						
 						<div class="form-group input-group">
 							<label class="input-group-addon" for="b_day">
 								생년월일
