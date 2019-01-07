@@ -13,3 +13,6 @@ ShareYourTalent는 평범한 이들의 재능나눔과 유료 상품의 부담�
 사용툴: Eclipse, Github Desktop, VisualStudioCode
 
 사용API: 다음지도 API
+
+# 메인 화면
+<img width="811" alt="2019-01-07 4 30 30" src="https://user-images.githubusercontent.com/43393426/50754601-9cb64d00-1299-11e9-82fa-af59ce071f2e.png">
