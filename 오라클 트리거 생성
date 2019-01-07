@@ -9,4 +9,5 @@ BEGIN
 UPDATE reg_t SET r_equals = r_equals+1 WHERE r_idx = join_idx;
 END;
 
-참여기능을 수행하여 PARTI_T 테이블에 INSERT할 때마다 REG_T의 해당 게시물의 R_EQUALS값이 1씩 증가하게 된다.
+참여할 때마다 DB에 접속하여 증가시키는 것보다 DB가 특정 이벤트를 인식하게 만들어 접속 횟수를 줄이기 위해 생성! 
+사용자가 참여할 때 수행하는 것으로 참여테이블에 INSERT할 때마다 해당 게시물의 R_EQUALS값이 1씩 증가하게 된다.
