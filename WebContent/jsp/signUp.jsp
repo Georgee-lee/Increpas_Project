@@ -7,10 +7,14 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 	<link href="css/bootstrap.min2.css" rel="stylesheet">    
-    <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">       
+    <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet">       
 	<link href="css/jquery-ui.min.css" rel="stylesheet"> 
-	<link href="css/signup2.css" rel="stylesheet">   
-
+	<link href="css/signup2.css" rel="stylesheet">
+	<style type="text/css">
+		.txt {
+			margin-top: 12%;
+		}
+	</style>
 </head>
 <body>	
 	<div class="w600">
@@ -82,7 +86,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 	
 	<script>
