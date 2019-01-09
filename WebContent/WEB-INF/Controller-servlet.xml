@@ -30,7 +30,7 @@ xmlns:context="http://www.springframework.org/schema/context"
 	 	<property name="maxUploadSize" value="-1"/>
 	 </bean>
 	 
-	<!-- project.controller 패키지 안에 있는 클래스들을 컨트롤러로 사용하겠다는 의미 -->
+	<!-- project.controller 패키지 안에 있는 클래스들을 component로 사용하겠다는 의미 -->
  	<context:component-scan base-package="project.controller"/>
  
 	<!-- View Resolver를 설정하자! -->

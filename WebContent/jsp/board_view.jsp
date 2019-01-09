@@ -69,10 +69,6 @@
 			${fvo.f_content }
 		</div>
 		<br><br>
-		<!-- //-->
-		
-		 <div align='right' style='font-family:tahoma;'></div>
-
 		 </td>
 		</tr>
 	</table>
@@ -114,7 +110,7 @@
 	<!-- Footer -->
   <footer class="py-5 bg-warning">
       <div class="container">
-       <p class="m-0 text-center text-white">Copyright &copy; HAYLEY 2017</p>
+       <p class="m-0 text-center text-white">Copyright &copy; HAYLEY 2018</p>
         <!-- //right area END -->
       <div class="quick1">
         <a href="#"><img src="images/btn_top.png" /></a>
