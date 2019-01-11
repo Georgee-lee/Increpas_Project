@@ -33,7 +33,7 @@ public class LoginControll {
 		return "signUp";
 	}	
 	
-	@RequestMapping(value="/signup", method=RequestMethod.POST)
+	@RequestMapping(value="signup", method=RequestMethod.POST)
 	public ModelAndView signup(UserVO vo) {
 		ModelAndView mv = new ModelAndView();
 		
@@ -54,7 +54,7 @@ public class LoginControll {
 	public String login() {
 		return "login";
 	}	
-	@RequestMapping(value="/login", method=RequestMethod.POST)
+	@RequestMapping(value="login", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, String> login(UserVO vo) {
 		Map<String, String> map = new HashMap<String, String>();
@@ -75,7 +75,7 @@ public class LoginControll {
 	public String searchid() {
 		return "searchID_PW";
 	}
-	@RequestMapping(value="/searchid", method=RequestMethod.POST)
+	@RequestMapping(value="searchid", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, String> searchid(String u_name , String u_email) {
 		
@@ -89,7 +89,7 @@ public class LoginControll {
 	}
 	// 비밀번호 찾기
 
-	@RequestMapping(value="/searchpw", method= {RequestMethod.POST,RequestMethod.GET}) // 405에러 해결책으로 둘다 선언
+	@RequestMapping(value="searchpw", method= {RequestMethod.POST,RequestMethod.GET}) // 405에러 해결책으로 둘다 선언
 	@ResponseBody
 	public Map<String, String> searchpw(String u_id , String u_email) {
 				
@@ -110,7 +110,7 @@ public class LoginControll {
 	}
 	
 	// DB에 있는 ID 값과 내가 입력한 ID값 검사 기능
-	@RequestMapping(value="/signUp", method=RequestMethod.POST)
+	@RequestMapping(value="signUp", method=RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> idcheck(String u_id) {
         
@@ -123,7 +123,7 @@ public class LoginControll {
         return map;
     }
 	
-    @RequestMapping(value="/check_email", method=RequestMethod.POST)
+    @RequestMapping(value="check_email", method=RequestMethod.POST)
     @ResponseBody
     public Map<String, Integer> email_Check(String u_email){
 		
