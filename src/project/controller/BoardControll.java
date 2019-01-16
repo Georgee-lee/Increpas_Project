@@ -95,7 +95,7 @@ public class BoardControll {
 		BoardVO[] ar = f_dao.getList(map);
 		int searchNum = ar.length;
 		
-		/* 만약 검색했다면 검색된 레코드 수 만큼 페이징을 다시 한다! */
+		// 만약 검색했다면 검색된 레코드 수 만큼 페이징을 다시 한다!
 		if(searchValue != null) {
 			//페이징 처리를 하는 객체 생성
 			Paging page2 = new Paging(nowPage, searchNum, BLOCK_LIST, BLOCK_PAGE, boardType);

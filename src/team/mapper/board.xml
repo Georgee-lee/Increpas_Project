@@ -41,7 +41,7 @@
 		where f_idx = #{f_idx}
 	</select>
 
-	<!-- 자유게시판에서 원하는 글목록 가져오기// 검색기능도 같이 한다 -->
+	<!-- 자유게시판에서 원하는 글목록 가져오기 / 검색기능도 같이 한다 -->
 	<select id="getlist" resultMap="free1" parameterType="java.util.Map">
 	  select * from
 	  (
