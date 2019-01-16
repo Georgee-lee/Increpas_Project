@@ -1,5 +1,3 @@
-
-
 import javax.servlet.annotation.WebServlet;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
