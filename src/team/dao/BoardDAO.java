@@ -92,7 +92,7 @@ public class BoardDAO {
 	
 	 /* 조회수 증가시키기 */
 	 public void upHit(String f_idx) {
-		int i = ss.update("free.uphit", f_idx);
+		ss.update("free.uphit", f_idx);
 	 }
 	 
 	 /* 해당 글에 댓글 쓰기 */

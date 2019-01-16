@@ -39,7 +39,7 @@ xmlns:context="http://www.springframework.org/schema/context"
 		<property name="prefix" value="/jsp/"/><!-- 뷰페이지 디렉토리로서, WebContent안에 jsp폴더 안에 있는 jsp들을 뜻함 -->
 	</bean>
 	
-	<!-- URL Mapping을 위한 default Servlet을 설정하여 자신이 읽지 못하는 파일들을 js의 servlet으로 전달한다! -->
+	<!-- URL Mapping을 위한 default Servlet을 설정하여 자신이 읽지 못하는 파일들을 jsp의 servlet으로 전달한다! -->
 	 <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 	 	<property name="alwaysUseFullPath" value="true" />
 	 </bean>
