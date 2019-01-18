@@ -128,7 +128,7 @@
 		}).done(function(data){				
 			
 			if ( data.msg == '0'){ 
-				alert("로그인 성공!");
+				alert("반갑습니다, "+data.name+"님");
 				location.href="index";			
 			}else
 				alert("아이디 또는 비밀번호를 확인하세요!");		

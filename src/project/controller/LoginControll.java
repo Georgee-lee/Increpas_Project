@@ -54,6 +54,7 @@ public class LoginControll {
 	public String login() {
 		return "login";
 	}	
+	
 	@RequestMapping(value="login", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, String> login(UserVO vo) {
@@ -89,7 +90,7 @@ public class LoginControll {
 	}
 	// 비밀번호 찾기
 
-	@RequestMapping(value="searchpw", method= {RequestMethod.POST,RequestMethod.GET}) // 405에러 해결책으로 둘다 선언
+	@RequestMapping(value="searchpw", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, String> searchpw(String u_id , String u_email) {
 				

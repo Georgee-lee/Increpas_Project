@@ -177,7 +177,7 @@ public class BoardControll {
 		//우선 현재 읽기를 하는 게시물에 앞서 읽었던 게시물이라면 조회수를 증가시키면 안된다!!
 		//한 번이라도 읽은 게시물은(BbsVO) HttpSession에 저장된 ArrayList 안에 있다.
 		//즉, 한번이라도 읽었다면 그 게시물은 세션이 있으므로 비교해서 널이면 증가, 널이 아니면 그대로
-		HttpSession session  = request.getSession();
+		session  = request.getSession();
 		Object obj = session.getAttribute("view_list");
 		
 		List<BoardVO> list = null;

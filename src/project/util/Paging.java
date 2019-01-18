@@ -47,7 +47,7 @@ public class Paging {
 			endPage = totalPage;
 		
 		//표현할 시작 게시물의 행번호와 마지막 게시물의 행번호를
-		//구한다.(bbs2테이블에서 게시물들을 추출하는 행번호)
+		//구한다.(게시판 테이블에서 게시물들을 추출하는 행번호)
 		begin = (nowPage - 1) * blockList + 1;
 		end = begin + blockList - 1;
 		
@@ -89,7 +89,7 @@ public class Paging {
 				sb.append(boardType); //게시판 종류 
 				sb.append("&nowPage=");
 				sb.append(i);//파라미터 값
-				sb.append("'>");// <li><a href='list.inc?nowPage=1'>
+				sb.append("'>");// <li><a href=flist?boardType=free&nowPage=1'>
 				sb.append(i); //화면에 출력되는 페이지 번호
 				sb.append("</a></li>");
 			}			

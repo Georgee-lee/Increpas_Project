@@ -118,8 +118,7 @@
 				dataType : "json"
 				}).done(function(data){							
 					if(data.u_id != null){
-						alert("회원님의 ID는: "+data.u_id+" 입니다.");
-						frm.submit();
+						alert("회원님의 ID는 "+data.u_id+" 입니다.");
 						location.href="login";	
 					}	
 					else{
@@ -130,7 +129,7 @@
 					}
 					
 				}).fail(function(err){
-					alert("err :"+err);
+					console.log("err :"+err);
 				});			
 					
 		}
@@ -149,6 +148,7 @@
 				frm.email.focus();
 				return;
 			}	
+			
 			$.ajax({
 				type : 'POST',
 				data : "u_id="+encodeURIComponent(r_id)+"&u_email="+encodeURIComponent(r_email),
@@ -156,8 +156,7 @@
 				dataType : "json"
 				}).done(function(data){		
 					if ( data.u_pwd != null){
-						alert(r_id+"님이 요청하신 정보:"+data.u_pwd);						
-						frm.submit();	
+						alert("회원님의 Password는 "+data.u_pwd+" 입니다.");						
 						location.href="login";	
 					}
 					else{
@@ -167,10 +166,8 @@
 						frm.id.focus();
 					}
 				}).fail(function(err){
-					alert("일치하는 정보가 없습니다.!");	
-					
+					console.log("err :"+err);
 				});			
-				
 		}		
 	</script>	
 </body>
