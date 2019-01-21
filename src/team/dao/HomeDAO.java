@@ -6,11 +6,12 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import team.vo.BoardVO;
 import team.vo.RegVO;
 
-@Component
+@Repository
 public class HomeDAO {
 
 	/* 인덱스(메인페이지)에 접근할 때 사용하는 DAO입니다. */
