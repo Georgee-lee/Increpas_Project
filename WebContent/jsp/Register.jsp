@@ -126,9 +126,8 @@
 					<td colspan="3" class="bt">
 					<input type="hidden" name="r_writer" value="${lvo.u_name }">
 					<input type="hidden" name="u_idx" value="${lvo.u_idx }">
-					<button type="button" class="btn btn-danger" style="float: right;" onclick="javascript:location.href='index'">등록 취소</button>
+					<button type="button" class="btn btn-danger" style="float: right;" onclick="location.href='index'">등록 취소</button>
 					<button type="button" class="btn btn-primary" style="float: right; margin-right: 5px" onclick="sendData()">등록 완료</button></td>
-					
 			 	</tr>		
 			</tbody>
 		</table>

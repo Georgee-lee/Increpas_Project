@@ -51,8 +51,7 @@ public class JoinControll {
 	@ResponseBody
 	public Map<String, Integer> isjoin(JoinVO jvo) {
 		Map<String, Integer> map = new HashMap<>();
-		String join = "";
-		
+
 		int joinCheck = j_dao.joinCheck(jvo);
 		
 		if(joinCheck == 0) 
